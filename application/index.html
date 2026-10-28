@@ -4,26 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{APP_TITLE}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main>
-    <h1>{{APP_TITLE}}</h1>
-    <form id="task-form">
-      <input id="title" placeholder="Task title" required>
-      <select id="priority"><option>High</option><option selected>Medium</option><option>Low</option></select>
-      <select id="status"><option selected>Pending</option><option>Completed</option></select>
-      <button type="submit">Add Task</button>
+    <header class="hero">
+      <div class="logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <h1>{{APP_TITLE}}</h1>
+      <p class="sub">Plan your academic work. Stay on top of every deadline.</p>
+    </header>
+
+    <section class="stats">
+      <div class="stat"><span id="s-total">0</span><small>Total</small></div>
+      <div class="stat"><span id="s-pending">0</span><small>Pending</small></div>
+      <div class="stat"><span id="s-done">0</span><small>Completed</small></div>
+    </section>
+
+    <form id="task-form" class="card composer">
+      <input id="title" placeholder="What do you need to do?" autocomplete="off" required>
+      <select id="priority" aria-label="Priority"><option>High</option><option selected>Medium</option><option>Low</option></select>
+      <select id="status" aria-label="Status"><option selected>Pending</option><option>Completed</option></select>
+      <button type="submit" class="btn-primary">Add task</button>
     </form>
-    <div class="bar">
-      <input id="search" placeholder="Search tasks...">
-      <select id="filter"><option value="">All</option><option>Pending</option><option>Completed</option></select>
-      <span id="stats"></span>
+
+    <div class="toolbar">
+      <input id="search" placeholder="Search tasks..." autocomplete="off">
+      <select id="filter" aria-label="Filter"><option value="">All</option><option>Pending</option><option>Completed</option></select>
     </div>
-    <table>
-      <thead><tr><th>ID</th><th>Task</th><th>Priority</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
-      <tbody id="rows"></tbody>
-    </table>
+
+    <section class="card list">
+      <table>
+        <thead><tr><th>ID</th><th>Task</th><th>Priority</th><th>Status</th><th>Created</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div id="empty" class="empty" hidden>No tasks yet. Add your first one above.</div>
+    </section>
+
+    <footer>Serverless on Cloudflare Workers &middot; Provisioned with Terraform</footer>
   </main>
   <script src="/script.js"></script>
 </body>
